@@ -23,7 +23,7 @@ export function ClothSimulation() {
     }, [physics]);
 
     // --------------------------------------------------------------
-    // 이벤트 핸들러: 클릭 시 옷감 시뮬레이션에 힘을 가함 (applyImpulse() 함수 사용)
+    // 이벤트 핸들러: 클릭 시 옷감 시뮬레이션에 힘을 가함, applyImpulse() 함수 사용
     // --------------------------------------------------------------
     const handlePointerMove = (e: ThreeEvent<PointerEvent>) => {
         // 닿은 지점 좌표
@@ -73,7 +73,7 @@ export function ClothSimulation() {
         ref={meshRef} 
         geometry={geometry} 
         frustumCulled={false} // 항상 렌더링 (깜빡임 방지)
-        // 💡 웹상: 마우스 클릭 시 & VR상: 컨트롤러 버튼 누르면 이벤트 처리
+        // 💡 웹상: 마우스 클릭 시 & VR상: 컨트롤러 버튼 누를 시 이벤트 처리
         onPointerDown={handlePointerMove}
         >
         <meshPhongMaterial 

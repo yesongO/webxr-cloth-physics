@@ -7,11 +7,13 @@
 
 import { vecSetDiff, vecLengthSquared, vecScale, vecAdd, vecCopy, vecDistSquared, vecSetCross } from '../math/vector';
 
-// 이웃한 삼각형 찾기
+/* 이웃한 삼각형을 찾는 함수 */
 function findTriNeighbors(triIds: Uint32Array | Uint16Array) {
     const edges = [];
     const numTris = triIds.length / 3;
 
+    // 모든 삼각형에 대해 세 변을 순환하며 각 변의 양 끝 정점을 찾음
+    // 각 변의 양 끝 정점과 edgeNr(변 번호)을 edges 배열에 추가
     for (let i = 0; i < numTris; i++) {
         for (let j = 0; j < 3; j++) {
             const id0 = triIds[3 * i + j];
@@ -19,12 +21,15 @@ function findTriNeighbors(triIds: Uint32Array | Uint16Array) {
             edges.push({ id0: Math.min(id0, id1), id1: Math.max(id0, id1), edgeNr: 3 * i + j });
         }
     }
+    // 두 변이 같을 경우 근접 배치되도록 정렬
     edges.sort((a, b) => ((a.id0 < b.id0) || (a.id0 == b.id0 && a.id1 < b.id1)) ? -1 : 1);
 
     const neighbors = new Int32Array(3 * numTris);
+    // 초기값은 -1(이웃 없음), -1:삼각형의 외부경계 변 or 공유되지 않는 변을 의미
     neighbors.fill(-1);
 
     let nr = 0;
+    // 모든 변에 대해 이웃 관계를 설정
     while (nr < edges.length) {
         let e0 = edges[nr];
         nr++;
@@ -52,10 +57,8 @@ export class ClothPhysics {
     public vel: Float32Array;
     public invMass: Float32Array;
     
-    // WebGL 호환성을 위해 인덱스는 Uint32Array를 사용합니다.
     public triIds: Uint32Array | Uint16Array; 
 
-    // Constraints
     public stretchingIds: Uint32Array;
     public bendingIds: Uint32Array;
     public stretchingLengths: Float32Array;
@@ -64,7 +67,6 @@ export class ClothPhysics {
     public stretchingCompliance: number = 0.0;
     public bendingCompliance: number = 1.0;
 
-    // Temps (임시 변수)
     private grads: Float32Array;
     
     constructor(meshData: ClothData, bendingCompliance = 1.0) {
@@ -89,9 +91,13 @@ export class ClothPhysics {
                 const id1 = this.triIds[3 * i + (j + 1) % 3];
                 const n = neighbors[3 * i + j];
                 
+                // 각 변을 딱 한번씩만 edgeIds 배열에 추가하는 조건문
                 if (n < 0 || id0 < id1) {
                     edgeIds.push(id0); edgeIds.push(id1);
                 }
+                // 삼각형에서 공유되는 변일 경우 triPairIds 배열에 추가
+                // id0, id1 : 현재 삼각형 두개에서 공유하는 변의 두 정점 인덱스
+                // id2, id3 : 공유하는 변을 기준으로 한 나머지 삼각형 두 정점 인덱스
                 if (n >= 0) {
                     const ni = Math.floor(n / 3);
                     const nj = n % 3;
@@ -102,7 +108,6 @@ export class ClothPhysics {
             }
         }
 
-        // Uint32Array로 통일하여 WebGL 에러 방지
         this.stretchingIds = new Uint32Array(edgeIds);
         this.bendingIds = new Uint32Array(triPairIds);
         this.stretchingLengths = new Float32Array(this.stretchingIds.length / 2);
@@ -113,12 +118,14 @@ export class ClothPhysics {
     }
 
     initPhysics() {
+        // 역질량을 모두 0으로 초기화 (정점 고정된 상태)
         this.invMass.fill(0.0);
         const numTris = this.triIds.length / 3;
         const e0 = [0.0, 0.0, 0.0];
         const e1 = [0.0, 0.0, 0.0];
         const c = [0.0, 0.0, 0.0];
 
+        // 삼각형의 면적을 계산하여 역질량을 계산
         for (let i = 0; i < numTris; i++) {
             const id0 = this.triIds[3 * i];
             const id1 = this.triIds[3 * i + 1];
@@ -133,11 +140,14 @@ export class ClothPhysics {
             this.invMass[id2] += pInvMass;
         }
 
+        // 두 정점의 거리를 계산하여 스트레칭 길이 배열에 저장
         for (let i = 0; i < this.stretchingLengths.length; i++) {
             const id0 = this.stretchingIds[2 * i];
             const id1 = this.stretchingIds[2 * i + 1];
             this.stretchingLengths[i] = Math.sqrt(vecDistSquared(this.pos, id0, this.pos, id1));
         }
+
+        // 두 정점의 겹치는 변(대각선 변)을 계산하여 굽힘 길이 배열에 저장
         for (let i = 0; i < this.bendingLengths.length; i++) {
             const id0 = this.bendingIds[4 * i + 2];
             const id1 = this.bendingIds[4 * i + 3];
@@ -154,6 +164,10 @@ export class ClothPhysics {
     }
 
     // --- Simulation Steps ---
+    // -----------------------------------------------------------
+    // Pre-Solve: 물리 상태를 중력 등 외부 힘을 반영하여 준비
+    // Solve: 제약 조건을 반영하여 해결
+    // Post-Solve: 최종 위치와 속도를 계산하여 업데이트
     
     preSolve(dt: number, gravity: number[]) {
         for (let i = 0; i < this.numParticles; i++) {
@@ -166,7 +180,7 @@ export class ClothPhysics {
             vecCopy(this.prevPos, i, this.pos, i);
             vecAdd(this.pos, i, this.vel, i, dt);
             
-            // 바닥 충돌 처리
+            // 바닥 충돌 처리 (y좌표를 0으로 설정)
             if (this.pos[3 * i + 1] < 0.0) {
                 vecCopy(this.pos, i, this.prevPos, i);
                 this.pos[3 * i + 1] = 0.0;
@@ -174,6 +188,7 @@ export class ClothPhysics {
         }
     }
 
+    // 스트레칭(Stretching)과 굽힘(Bending) 제약 조건을 반영하여 해결
     solve(dt: number) {
         this.solveConstraints(this.stretchingIds, this.stretchingLengths, this.stretchingCompliance, dt, 2);
         this.solveConstraints(this.bendingIds, this.bendingLengths, this.bendingCompliance, dt, 4);

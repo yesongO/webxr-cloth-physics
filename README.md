@@ -112,4 +112,4 @@ src/
 ### 🎥 Demo Preview 
 
 ---
-[![React XR Cloth](http://img.youtube.com/vi/SEuUUhFpLcI/maxresdefault.jpg)](https://youtu.be/SEuUUhFpLcI)
+[![React XR Cloth](http://img.youtube.com/vi/SEuUUhFpLcI/hqdefault.jpg)](https://youtu.be/SEuUUhFpLcI)

@@ -9,7 +9,8 @@ A portable, TypeScript-based PBD cloth engine designed for React-Three-Fiber & W
 ---
 React XR Cloth는 WebXR 환경에서 재사용 가능한 Cloth Physics 엔진을 목표로 만든 작은 라이브러리 + 데모 프로젝트입니다. 기존의 바닐라 JavaScript로 구현된 PBD 물리 시뮬레이션 로직을 분석하여 모던 프론트엔드 스택(React, TypeScript, React-Three-Fiber)환경에 맞게 재설계 및 현대화한 결과물입니다.  여기서 더 나아가 단순한 시각화를 넘어 WebXR(ex: Meta Quest 3) 환경에서 컨트롤러를 이용해 옷감에 물리적인 바람(Impulse)을 불어넣는 상호작용을 구현했습니다.
 
-<img width="1225" height="659" alt="react-xr-cloth-1" src="https://github.com/user-attachments/assets/32e89353-6ea3-446b-be8d-e0fc63301395" />
+![react_xr_cloth](https://github.com/user-attachments/assets/5a370441-c301-4b65-a792-82f6c7ddf6e3)
+
 
 <br/>
 <br/>

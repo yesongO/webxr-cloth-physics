@@ -120,7 +120,7 @@ src/
 
 <br/>
 
-### 🎥 Demo Preview 
+### 🎥 Demo Preview (click video!)
 
 ---
 <a href="https://youtu.be/SEuUUhFpLcI" target="_blank">

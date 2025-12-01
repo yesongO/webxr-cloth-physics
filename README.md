@@ -1,13 +1,13 @@
 ## React XR Cloth - Real-time Cloth Physics Toolkit for WebXR
 
-A portable, TypeScript-based PBD cloth engine designed for React-Three-Fiber & WebXR.
+A portable, **TypeScript-based PBD cloth engine** designed for **React-Three-Fiber & WebXR**.
 
 <br/>
 
 ### 📢 프로젝트 소개 (Overview)
 
 ---
-React XR Cloth는 WebXR 환경에서 재사용 가능한 Cloth Physics 엔진을 목표로 만든 작은 라이브러리 + 데모 프로젝트입니다. 기존의 바닐라 JavaScript로 구현된 PBD 물리 시뮬레이션 로직을 분석하여 모던 프론트엔드 스택(React, TypeScript, React-Three-Fiber)환경에 맞게 재설계 및 현대화한 결과물입니다. 여기서 더 나아가 단순한 시각화를 넘어서, WebXR(ex: Meta Quest 3) 환경 안에서 사용자가 직접 컨트롤러를 통해 옷감에 바람(Impulse)을 불어넣는 순간까지 구현했습니다. 이 프로젝트는 단순한 화면 속 시뮬레이션이 아니라, 사용자의 움직임이 곧 물리가 되는 몰입형 상호작용입니다.
+**React XR Cloth**는 WebXR 환경에서 재사용 가능한 **Cloth Physics 엔진**을 목표로 만든 작은 라이브러리 + 데모 프로젝트입니다. 기존의 바닐라 JavaScript로 구현된 **PBD 물리 시뮬레이션 로직**을 분석하여 모던 프론트엔드 스택(**React, TypeScript, React-Three-Fiber**)환경에 맞게 재설계 및 현대화한 결과물입니다. 여기서 더 나아가 단순한 시각화를 넘어서, WebXR(ex: Meta Quest 3) 환경 안에서 사용자가 직접 컨트롤러를 통해 옷감에 바람(Impulse)을 불어넣는 순간까지 구현했습니다. 이 프로젝트는 단순한 화면 속 시뮬레이션이 아니라, **사용자의 움직임이 곧 물리가 되는 몰입형 상호작용**입니다.
 
 <img src="https://github.com/user-attachments/assets/5a370441-c301-4b65-a792-82f6c7ddf6e3" width="50%" alt="react_xr_cloth" />
 
@@ -34,7 +34,7 @@ React XR Cloth는 이 구조적 한계를 해결하기 위해 다음 작업을 �
 - 💡 **물리 로직(Physics)과 렌더링 로직(View)** 완전 분리
 - 💡 독립적으로 테스트 가능한 **순수 물리 엔진** 구현
 
-즉, 라이브러리처럼 가져다 쓸 수 있는 Cloth Engine 형태를 제공합니다.
+즉, **라이브러리처럼 가져다 쓸 수 있는 Cloth Engine 형태**를 제공합니다.
 
 2. 2D 스크린 기반 인터랙션 한계를 극복
 기존 시뮬레이션은 대부분 마우스 드래그 기반 상호작용만 제공하여 실제 물리적 상호작용을 체감하기 어렵다는 근본적 한계가 있었습니다.
@@ -44,7 +44,7 @@ React XR Cloth는 이 구조적 한계를 해결하기 위해 다음 작업을 �
 - 💡 VR 컨트롤러의 **이동,속도,충돌 정보**를 실시간으로 물리 엔진에 전달
 - 💡 사용자가 직접 옷감에 자극을 줄 수 있는 **VR 인터랙션** 구현
 
-이를 통해 기존 웹 시뮬레이션을 넘어서는 공간 기반의 체감형 Cloth Experience를 제공합니다.
+이를 통해 기존 웹 시뮬레이션을 넘어서는 **공간 기반의 체감형 Cloth Experience**를 제공합니다.
 
 <br/>
 

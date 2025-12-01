@@ -4,7 +4,7 @@ A portable, **TypeScript-based PBD cloth engine** designed for **React-Three-Fib
 
 <br/>
 
-### 📢 프로젝트 소개 (Overview)
+## 📢 프로젝트 소개 (Overview)
 
 ---
 **React XR Cloth**는 WebXR 환경에서 재사용 가능한 **Cloth Physics 엔진**을 목표로 만든 작은 라이브러리 + 데모 프로젝트입니다. 기존의 바닐라 JavaScript로 구현된 **PBD 물리 시뮬레이션 로직**을 분석하여 모던 프론트엔드 스택(**React, TypeScript, React-Three-Fiber**)환경에 맞게 재설계 및 현대화한 결과물입니다. 여기서 더 나아가 단순한 시각화를 넘어서, **WebXR(ex: Meta Quest 3)** 환경 안에서 사용자가 직접 컨트롤러를 통해 옷감에 바람(Impulse)을 불어넣는 순간까지 구현했습니다. 이 프로젝트는 단순한 화면 속 시뮬레이션이 아니라, **사용자의 움직임이 곧 물리가 되는 몰입형 상호작용**입니다.
@@ -15,7 +15,7 @@ A portable, **TypeScript-based PBD cloth engine** designed for **React-Three-Fib
 <br/>
 <br/>
 
-### 💡 이 프로젝트가 해결하는 문제들 (Why This Project?)
+## 💡 이 프로젝트가 해결하는 문제들 (Why This Project?)
 
 ---
 WebXR 환경에서 독립적으로 재사용 가능한 Cloth Physics 엔진은 거의 존재하지 않습니다. 대부분의 구현은 대부분 렌더링 코드에 강하게 결합되어 있어 React Three Fiber나 XR 컨트롤러 입력과 유연하게 통합하기 어렵습니다. 또한 VR 컨트롤러의 움직임을 Cloth Simulation에 자연스럽게 투영할 수 있는 표준적인 인터랙션 레이어도 부족합니다.
@@ -48,7 +48,7 @@ React XR Cloth는 이 구조적 한계를 해결하기 위해 다음 작업을 �
 
 <br/>
 
-### 📁 프로젝트 구조 (Project Structure)
+## 📁 프로젝트 구조 (Project Structure)
 
 ---
 물리 엔진(Physics)과 렌더링(View) 레이어를 명확히 분리하고, 컴포넌트를 독립적으로 재사용할 수 있도록 모듈화된 형태로 구성되어 있습니다.
@@ -79,7 +79,7 @@ src/
 
 <br/>
 
-### 🚀 설치 및 실행 가이드 (Getting Started)
+## 🚀 설치 및 실행 가이드 (Getting Started)
 
 ---
 이 프로젝트는 WebXR Emulator와의 호환성을 위해 Three.js 0.160.0 버전을 고정(pinning)하여 개발되었습니다. 의존성 설치 시 해당 버전이 자동으로 설치됩니다.
@@ -100,7 +100,7 @@ src/
 
 <br/>
 
-### 🖥️ 프로젝트 스크린샷 (Screen Shot)
+## 🖥️ 프로젝트 스크린샷 (Screen Shot)
 
 ---
 <table>
@@ -132,7 +132,7 @@ src/
 
 <br/>
 
-### 🎥 Demo Preview (Click Video!)
+## 🎥 Demo Preview (Click Video!)
 
 ---
 <a href="https://youtu.be/SEuUUhFpLcI" target="_blank">
@@ -141,12 +141,12 @@ src/
 
 <br/>
 
-### 🛠️ Tech Stack (Screen Shot)
+## 🛠️ Tech Stack (Screen Shot)
 
 ---
-# Environment & Core
+#### Environment & Core
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 
-# 3D & XR
-![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white) ![R3F](https://img.shields.io/badge/React_Three_Fiber-000000?style=for-the-badge&logo=react&logoColor=white) ![XR](https://img.shields.io/badge/@react--three/xr_v6-FF4081?style=for-the-badge&logo=webxr&logoColor=white)
+#### 3D & XR
+![Three.js](https://img.shields.io/badge/Three.js-A3E3ED?style=for-the-badge&logo=three.js&logoColor=white) ![R3F](https://img.shields.io/badge/React_Three_Fiber-#3B91B4?style=for-the-badge&logo=react&logoColor=white) ![XR](https://img.shields.io/badge/@react--three/xr_v6-FF4081?style=for-the-badge&logo=webxr&logoColor=white)
 
